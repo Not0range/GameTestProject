@@ -6,7 +6,7 @@ const appDirectory = fs.realpathSync(process.cwd());
 module.exports = {
     entry: path.resolve(appDirectory, "src/app.ts"), //path to the main .ts file
     output: {
-        filename: "js/bundleName.js", //name for the js file that is created/compiled in memory
+        filename: "js/scripts.js", //name for the js file that is created/compiled in memory
         clean: true,
     },
     resolve: {
@@ -24,10 +24,17 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.tsx?$/i,
                 use: "ts-loader",
                 exclude: /node_modules/,
             },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[ext]',
+                },
+            }
         ],
     },
     plugins: [
